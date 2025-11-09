@@ -200,6 +200,7 @@ After the first run, the script saves a timestamp of the extraction. On subseque
 - Only records modified or created since the last extraction are downloaded
 - This significantly reduces extraction time for regular updates
 - The timestamp is stored in `.last_extraction.json` in each output folder
+- Duplicates are automatically removed based on the ticket "number" column (e.g., INC0001234, RITM0001234)
 
 ## Date Filtering Logic
 

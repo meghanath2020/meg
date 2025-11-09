@@ -204,8 +204,10 @@ class ExcelExporter:
                 # Combine with new data
                 combined_df = pd.concat([existing_df, df], ignore_index=True)
 
-                # Remove duplicates if sys_id exists
-                if 'sys_id' in combined_df.columns:
+                # Remove duplicates based on number column if present, otherwise use sys_id
+                if 'number' in combined_df.columns:
+                    combined_df = combined_df.drop_duplicates(subset=['number'])
+                elif 'sys_id' in combined_df.columns:
                     combined_df = combined_df.drop_duplicates(subset=['sys_id'])
 
                 # Write back

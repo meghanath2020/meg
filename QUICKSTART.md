@@ -103,6 +103,7 @@ After the first run:
 - Subsequent runs only download changes
 - Much faster!
 - Automatic - no configuration needed
+- Duplicates removed based on ticket "number" (e.g., INC0001234)
 
 ## Troubleshooting
 

@@ -236,13 +236,19 @@ class JSONv2Extractor:
         if all_records:
             df = pd.DataFrame(all_records)
             print(f"\nTotal records extracted: {len(df)}")
-            # Remove duplicates based on sys_id if present
-            if 'sys_id' in df.columns:
+            # Remove duplicates based on number column if present, otherwise use sys_id
+            if 'number' in df.columns:
+                before_dedup = len(df)
+                df = df.drop_duplicates(subset=['number'])
+                after_dedup = len(df)
+                if before_dedup != after_dedup:
+                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'number' column")
+            elif 'sys_id' in df.columns:
                 before_dedup = len(df)
                 df = df.drop_duplicates(subset=['sys_id'])
                 after_dedup = len(df)
                 if before_dedup != after_dedup:
-                    print(f"Removed {before_dedup - after_dedup} duplicate records")
+                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'sys_id' column")
             return df
         else:
             print("\nNo records extracted")

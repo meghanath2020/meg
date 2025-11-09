@@ -97,6 +97,7 @@ This is a comprehensive Python application for extracting data from multiple Ser
 - Only extracts changes since last run
 - Stored in `.last_extraction.json` per instance
 - Significantly reduces extraction time
+- Duplicates removed based on ticket "number" column (INC0001234, RITM0001234, etc.)
 
 ### 5. Data Export
 - XLSX format with multiple sheets
