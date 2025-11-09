@@ -237,18 +237,19 @@ class JSONv2Extractor:
             df = pd.DataFrame(all_records)
             print(f"\nTotal records extracted: {len(df)}")
             # Remove duplicates based on number column if present, otherwise use sys_id
+            # Keep='last' ensures the most recent record is retained
             if 'number' in df.columns:
                 before_dedup = len(df)
-                df = df.drop_duplicates(subset=['number'])
+                df = df.drop_duplicates(subset=['number'], keep='last')
                 after_dedup = len(df)
                 if before_dedup != after_dedup:
-                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'number' column")
+                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'number' column (kept latest)")
             elif 'sys_id' in df.columns:
                 before_dedup = len(df)
-                df = df.drop_duplicates(subset=['sys_id'])
+                df = df.drop_duplicates(subset=['sys_id'], keep='last')
                 after_dedup = len(df)
                 if before_dedup != after_dedup:
-                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'sys_id' column")
+                    print(f"Removed {before_dedup - after_dedup} duplicate records based on 'sys_id' column (kept latest)")
             return df
         else:
             print("\nNo records extracted")

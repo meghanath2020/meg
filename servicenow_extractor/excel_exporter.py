@@ -201,14 +201,15 @@ class ExcelExporter:
                 # Read existing data
                 existing_df = pd.read_excel(existing_file, sheet_name=sheet_name)
 
-                # Combine with new data
+                # Combine with new data - put new data last so it's kept during deduplication
                 combined_df = pd.concat([existing_df, df], ignore_index=True)
 
                 # Remove duplicates based on number column if present, otherwise use sys_id
+                # Keep='last' ensures the most recent (newly extracted) record is retained
                 if 'number' in combined_df.columns:
-                    combined_df = combined_df.drop_duplicates(subset=['number'])
+                    combined_df = combined_df.drop_duplicates(subset=['number'], keep='last')
                 elif 'sys_id' in combined_df.columns:
-                    combined_df = combined_df.drop_duplicates(subset=['sys_id'])
+                    combined_df = combined_df.drop_duplicates(subset=['sys_id'], keep='last')
 
                 # Write back
                 with pd.ExcelWriter(existing_file, engine='openpyxl', mode='w') as writer:
