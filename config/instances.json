@@ -1,0 +1,36 @@
+{
+  "instance1": {
+    "base_url": "https://instance1.service-now.com",
+    "extraction_method": "jsonv2",
+    "use_parent_groups": true,
+    "assignment_groups_file": "assignment_groups/instance1_groups.xlsx",
+    "ticket_types": [
+      "incident",
+      "sc_task",
+      "incident_task",
+      "problem"
+    ],
+    "output_folder": "output/instance1"
+  },
+  "instance2": {
+    "base_url": "https://instance2.service-now.com",
+    "extraction_method": "jsonv2",
+    "use_parent_groups": true,
+    "assignment_groups_file": "assignment_groups/instance2_groups.xlsx",
+    "ticket_types": [
+      "incident",
+      "sc_task"
+    ],
+    "output_folder": "output/instance2"
+  },
+  "instance3": {
+    "base_url": "https://instance3.service-now.com",
+    "extraction_method": "rest_api",
+    "use_parent_groups": false,
+    "assignment_groups_file": "assignment_groups/instance3_groups.xlsx",
+    "ticket_types": [
+      "incident"
+    ],
+    "output_folder": "output/instance3"
+  }
+}
